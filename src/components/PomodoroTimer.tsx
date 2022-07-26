@@ -4,7 +4,7 @@ function PomodoroTimer() {
     // States
     const [pomodoroTimer, setPomodoroTimer] = useState({
         timerRemaining: 1500, // default 25min pomodoro
-        timerInterval: 1, // default 1st pomodoro
+        timerInterval: 0, // default 1st pomodoro
         timerActive: false, // default timer paused
         timerBreak: false // default nonbreak
     });
@@ -31,7 +31,7 @@ function PomodoroTimer() {
     const reset = () => {
         setPomodoroTimer({
             timerRemaining: pomodoroConfig.configLength * 60,
-            timerInterval: 1,
+            timerInterval: 0,
             timerActive: false,
             timerBreak: false
         });
@@ -52,38 +52,32 @@ function PomodoroTimer() {
             }
         } 
         if (pomodoroTimer.timerActive && pomodoroTimer.timerRemaining === 0) {
-            return () => {
-                checkInterval();
-            }
-        }
-
-        // Checks what part of interval is active and sets up timer for next step
-        const checkInterval = () => {
-
-            if (!pomodoroTimer.timerBreak) {
-                if (pomodoroTimer.timerInterval < pomodoroConfig.configInterval) {
-                    setPomodoroTimer({
-                        timerRemaining: pomodoroConfig.configShortLength * 60,
-                        timerInterval: pomodoroTimer.timerInterval + 1,
-                        timerActive: false,
-                        timerBreak: true
-                    });    
+                // Check which step of interval and set up next timer
+                if (!pomodoroTimer.timerBreak) {
+                    if (pomodoroTimer.timerInterval < pomodoroConfig.configInterval - 1) {
+                        setPomodoroTimer({
+                            timerRemaining: pomodoroConfig.configShortLength * 60,
+                            timerInterval: pomodoroTimer.timerInterval,
+                            timerActive: false,
+                            timerBreak: true
+                        });    
+                    } else {
+                        setPomodoroTimer({
+                            timerRemaining: pomodoroConfig.configLongLength * 60,
+                            timerInterval: -1,
+                            timerActive: false,
+                            timerBreak: true
+                        });
+                    }
                 } else {
                     setPomodoroTimer({
-                        timerRemaining: pomodoroConfig.configLongLength * 60,
-                        timerInterval: 1,
+                        timerRemaining: pomodoroConfig.configLength * 60,
+                        timerInterval: pomodoroTimer.timerInterval + 1,
                         timerActive: false,
-                        timerBreak: true
-                    });
+                        timerBreak: false
+                    }); 
                 }
-            } else {
-                setPomodoroTimer({
-                    timerRemaining: pomodoroConfig.configLength * 60,
-                    timerInterval: pomodoroTimer.timerInterval,
-                    timerActive: false,
-                    timerBreak: true
-                });                
-            }
+            
         }
     }, [pomodoroTimer, setPomodoroTimer, pomodoroConfig]);
 
@@ -103,8 +97,9 @@ function PomodoroTimer() {
     // Show Config Button
     const handleTimerConfig = (e: React.ChangeEvent<any>) => {
         e.preventDefault();
+        document.querySelector('.pomodoro-timer')?.classList.toggle('hidden');
         document.querySelector('.timer-config')?.classList.toggle('hidden');
-        toggleTimerPause();
+        if (pomodoroTimer.timerActive) { toggleTimerPause() };
     }
 
     // 
@@ -162,11 +157,12 @@ function PomodoroTimer() {
 
         setPomodoroTimer({
             timerRemaining: pomodoroConfigTemp.tempLength * 60,
-            timerInterval: 1,
+            timerInterval: 0,
             timerActive: false,
             timerBreak: false
         });
 
+        document.querySelector('.pomodoro-timer')?.classList.toggle('hidden');
         document.querySelector('.timer-config')?.classList.toggle('hidden');
     }
 
@@ -180,6 +176,7 @@ function PomodoroTimer() {
             tempLongLength: pomodoroConfig.configLongLength,
         });
 
+        document.querySelector('.pomodoro-timer')?.classList.toggle('hidden');
         document.querySelector('.timer-config')?.classList.toggle('hidden');
     }
     
@@ -201,32 +198,52 @@ function PomodoroTimer() {
 
     return (
         <div>
-            <p>{timerText}</p>
+            <h3>Pomodoro Timer</h3>
+            <div className='pomodoro-timer'>
+                <div className='pomodoro-progress-bar'></div>
+                <p>{timerText}</p>
+                <button onClick={handleTimerPause}>Start/Stop</button>
+                <button onClick={handleTimerReset}>Reset</button>
+                <button onClick={handleTimerConfig}>Config</button>
+            </div>
             <div className='hidden timer-config'>
                 <h3>Pomodoro Config</h3>
-                <label>Pomodoro Interval: 
-                    <input type="number" value={pomodoroConfigTemp.tempInterval} onChange={handleTimerConfigInterval} />
+                <label className="pomodoro-config-label">Pomodoro Interval 
+                    <input 
+                        className="pomodoro-config-input"
+                        type="number"
+                        min="1"
+                        value={pomodoroConfigTemp.tempInterval} 
+                        onChange={handleTimerConfigInterval} />
                 </label>
-                <br/>
-                <label>Pomodoro Length: 
-                    <input type="number" value={pomodoroConfigTemp.tempLength} onChange={handleTimerConfigPomodoroLengthChange} />
+                <label className="pomodoro-config-label">Pomodoro Length
+                    <input 
+                        className="pomodoro-config-input"
+                        type="number" 
+                        min="0" 
+                        value={pomodoroConfigTemp.tempLength} 
+                        onChange={handleTimerConfigPomodoroLengthChange} />
                 </label>
-                <br/>
-                <label>Short Break Length: 
-                    <input type="number" value={pomodoroConfigTemp.tempShortLength} onChange={handleTimerConfigShortLength} />
+                <label className="pomodoro-config-label">Short Break Length
+                    <input 
+                        className="pomodoro-config-input"
+                        type="number" 
+                        min="0" 
+                        value={pomodoroConfigTemp.tempShortLength} 
+                        onChange={handleTimerConfigShortLength} />
                 </label>
-                <br/>
-                <label>Long Break Length: 
-                    <input type="number" value={pomodoroConfigTemp.tempLongLength} onChange={handleTimerConfigLongLength} />
+                <label className="pomodoro-config-label">Long Break Length
+                    <input 
+                        className="pomodoro-config-input"
+                        type="number" 
+                        min="0" 
+                        value={pomodoroConfigTemp.tempLongLength} 
+                        onChange={handleTimerConfigLongLength} />
                 </label>
-                <br/>
                 <button onClick={handleConfigDefault}>Default Settings</button>
                 <button onClick={handleConfigSave}>Save Settings</button>
                 <button onClick={handleConfigCancel}>Cancel</button>
             </div>
-            <button onClick={handleTimerPause}>Start/Stop</button>
-            <button onClick={handleTimerReset}>Reset</button>
-            <button onClick={handleTimerConfig}>Config</button>
         </div>
     )
 }
