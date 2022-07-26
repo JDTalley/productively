@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <h1>Productivity</h1>
-      <PomodoroTimer />
+      <div className="pomodoro-component"><PomodoroTimer /></div>
     </div>
   );
 }
