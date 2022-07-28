@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
+export interface PomodoroTimer {
+    timerRemaining: number;
+    timerInterval: number;
+    timerActive: boolean;
+    timerBreak: boolean;
+}
+
+export interface PomodoroConfig {
+    configLength: number;
+    configInterval: number;
+    configShortLength: number;
+    configLongLength: number;
+}
+
 export interface Props {
-    pomodoroTimer: {
-        timerRemaining: number;
-        timerInterval: number;
-        timerActive: boolean;
-        timerBreak: boolean;
-    },
-    pomodoroConfig: {
-        configLength: number;
-        configInterval: number;
-        configShortLength: number;
-        configLongLength: number;
-    },
-    setPomodoroTimer: (timer: pomodoroTimer) => void
+    pomodoroTimer: PomodoroTimer,
+    pomodoroConfig: PomodoroConfig,
+    setPomodoroTimer: React.Dispatch<React.SetStateAction<PomodoroTimer>>;
 };
 
 const PomodoroTimer: React.FC<Props> = (props) => {
