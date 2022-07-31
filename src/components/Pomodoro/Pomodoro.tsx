@@ -1,33 +1,75 @@
-import React, { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
+import PomodoroConfig from './PomodoroConfig';
 import PomodoroTimer from './PomodoroTimer';
 
 function Pomodoro() {
     // States
-    const [pomodoroTimer, setPomodoroTimer] = useState({
-        timerRemaining: 1500, // default 25min pomodoro
-        timerInterval: 1, // default 1st pomodoro
-        timerActive: false, // default timer paused
-        timerBreak: false // default nonbreak
+    const [timer, setTimer] = useState({
+        remaining: 1500, // default 25min pomodoro
+        interval: 0, // default 1st pomodoro
+        isActive: false, // default timer paused
+        isBreak: false // default nonbreak
     });
-    const [pomodoroConfig, setPomodoroConfig] = useState({
-        configLength: 25, // default 25min pomodoro
-        configInterval: 4, // default 4 pomodoros to long break
-        configShortLength: 5, // default 5min short break
-        configLongLength: 15 // default 5min short break
+
+    const [config, setConfig] = useState({
+        length: 25, // default 25min pomodoro
+        interval: 4, // default 4 pomodoros to long break
+        shortBreakLength: 5, // default 5min short break
+        longBreakLength: 15 // default 5min short break
     });
-    const [pomodoroConfigTemp, setPomodoroConfigTemp] = useState({
-        tempLength: 25, 
-        tempInterval: 4, 
-        tempShortLength: 5, 
-        tempLongLength: 15 
-    });
+
+    const [step, setStep] = useState('Pomodoro');
+
+    const handleSetTimer = useCallback((remaining: number, interval: number, isActive: boolean, isBreak: boolean) => {
+        setTimer({
+            remaining: remaining,
+            interval: interval,
+            isActive: isActive,
+            isBreak: isBreak
+        });
+    }, []);
+
+    const handleSetConfig = useCallback((length: number, interval: number, shortBreakLength: number, longBreakLength: number) => {
+        setConfig({
+            length: length,
+            interval: interval,
+            shortBreakLength: shortBreakLength,
+            longBreakLength: longBreakLength
+        });
+
+        setTimer({
+            remaining: length * 60,
+            interval: 0,
+            isActive: false,
+            isBreak: false
+        });
+
+        setStep('Pomodoro');
+    }, []);
+
+    const handleSetStep = useCallback((step='Pomodoro') => {
+        setStep(step);
+    }, []);
+
+    const handlePause = useCallback(() => {
+        setTimer({
+            ...timer,
+            isActive: false
+        });
+    }, [timer]);
 
     return (
         <div>
             <PomodoroTimer 
-                pomodoroTimer={pomodoroTimer}
-                pomodoroConfig={pomodoroConfig}
-                setPomodoroTimer={setPomodoroTimer} />
+                pomodoroTimer={timer}
+                pomodoroConfig={config}
+                pomodoroStep = {step}
+                handleSetTimer={handleSetTimer}
+                handleSetStep={handleSetStep} />
+            <PomodoroConfig
+                pomodoroConfig={config}
+                handleSetConfig={handleSetConfig}
+                handlePause={handlePause} />
         </div>
     )
 }
