@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="App">
       <h1>Productivity</h1>
+      <div className="tasklist-component"><TaskList /></div>
       <div className="pomodoro-component"><Pomodoro /></div>
-      <TaskList />
     </div>
   );
 }
