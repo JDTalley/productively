@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { TaskType } from '../interfaces/taskList.interface';
 import TaskItem from './TaskItem';
-import AddTaskItem from './AddTaskItem'
+import AddTaskItem from './AddTaskItem';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
 
 function TaskList() {
     const [tasks, setTasks] = useState<TaskType[]>([]);
@@ -11,6 +13,14 @@ function TaskList() {
             ...prevTasks,
             task,
           ])
+    }
+
+    const deleteTaskItem = (selectedTask: TaskType) => {
+        const newTasks = tasks.filter((task) => {
+            return task !== selectedTask;
+        });
+
+        setTasks(newTasks);
     }
 
     const toggleComplete = (selectedTask: TaskType) => {
@@ -28,14 +38,26 @@ function TaskList() {
     }
 
     return (
-        <div>
+        <Box 
+            sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            margin: '2rem 1rem',
+        }}>
             <AddTaskItem addTaskItem={addTaskItem} />
-            {tasks.map((task) => {
-                return (
-                    <TaskItem key={task.description} task={task} toggleComplete={toggleComplete} />
-                )
-            })}
-        </div>
+            <List sx={{width: '100%', margin: '0 2em',}} dense={true}>
+                {tasks.map((task, i) => {
+                    return (
+                        <TaskItem 
+                            key={i} 
+                            task={task} 
+                            toggleComplete={toggleComplete}
+                            deleteTaskItem={deleteTaskItem} />
+                    )
+                })}
+            </List>
+        </Box>
     )
 }
 

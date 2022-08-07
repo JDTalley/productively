@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Typography from '@mui/material/Typography';
 
 export interface Props {
     isActive: boolean,
@@ -36,9 +37,9 @@ const Timer: React.FC<Props> = (props) => {
     const timerText = `${padNumber(minutes)}:${padNumber(seconds)}`;
 
     return (
-        <div>
-            <p>{timerText}</p>
-        </div>
+        <Typography sx={{textAlign: 'center', fontSize: '2rem',}}>
+            {timerText}
+        </Typography>
     )
 }
 

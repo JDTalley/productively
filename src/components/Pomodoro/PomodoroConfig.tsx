@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { PomodoroConfigType} from '../interfaces/pomodoro.interface';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 export interface Props {
     pomodoroConfig: PomodoroConfigType,
@@ -8,6 +15,7 @@ export interface Props {
 };
 
 const PomodoroConfig: React.FC<Props> = (props) => {
+    // Manages Configuration Fields
     const [configTemp, setConfigTemp] = useState({
         length: 25, 
         interval: 4, 
@@ -15,15 +23,27 @@ const PomodoroConfig: React.FC<Props> = (props) => {
         longBreakLength: 15 
     });
 
+    // Dialog Open or Closed
+    const [open, setOpen] = useState(false);
+
     // Handlers
-    // Show Config Button
-    const handleShowConfig = (e: React.ChangeEvent<any>) => {
-        e.preventDefault();
-        document.querySelector('.pomodoro-timer')?.classList.toggle('hidden');
-        document.querySelector('.timer-config')?.classList.toggle('hidden');
-        // Pause?
+
+    const handleClickOpen = () => {
+        setOpen(true);
+
         props.handlePause();
-    }
+    };
+
+    const handleClickClose = () => {
+        setOpen(false);
+
+        setConfigTemp({
+            length: props.pomodoroConfig.length,
+            interval: props.pomodoroConfig.interval,
+            shortBreakLength: props.pomodoroConfig.shortBreakLength,
+            longBreakLength: props.pomodoroConfig.longBreakLength,
+        });
+    };
 
     const handleTimerConfigPomodoroLengthChange = (e: React.ChangeEvent<any>) => {
         e.preventDefault();
@@ -71,67 +91,51 @@ const PomodoroConfig: React.FC<Props> = (props) => {
     const handleConfigSave = (e: React.ChangeEvent<any>) => {
         e.preventDefault();
         props.handleSetConfig(configTemp.length, configTemp.interval, configTemp.shortBreakLength, configTemp.longBreakLength);
-
-        document.querySelector('.pomodoro-timer')?.classList.toggle('hidden');
-        document.querySelector('.timer-config')?.classList.toggle('hidden');
-    }
-
-    const handleConfigCancel = (e: React.ChangeEvent<any>) => {
-        e.preventDefault();
-
-        setConfigTemp({
-            length: props.pomodoroConfig.length,
-            interval: props.pomodoroConfig.interval,
-            shortBreakLength: props.pomodoroConfig.shortBreakLength,
-            longBreakLength: props.pomodoroConfig.longBreakLength,
-        });
-
-        document.querySelector('.pomodoro-timer')?.classList.toggle('hidden');
-        document.querySelector('.timer-config')?.classList.toggle('hidden');
+        setOpen(false);
     }
 
     return (
-        <div>
-            <div className='hidden timer-config'>
-                <h3>Pomodoro Config</h3>
-                <label className="pomodoro-config-label">Pomodoro Interval 
-                    <input 
-                        className="pomodoro-config-input"
+        <Box>
+            <Dialog open={open} onClose={handleClickClose}>
+                <DialogTitle>Pomodoro Configuration</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        label="Pomodoro Interval"
+                        variant="standard"
                         type="number"
-                        min="1"
-                        value={configTemp.interval} 
-                        onChange={handleTimerConfigInterval} />
-                </label>
-                <label className="pomodoro-config-label">Pomodoro Length
-                    <input 
-                        className="pomodoro-config-input"
-                        type="number" 
-                        min="0" 
-                        value={configTemp.length} 
-                        onChange={handleTimerConfigPomodoroLengthChange} />
-                </label>
-                <label className="pomodoro-config-label">Short Break Length
-                    <input 
-                        className="pomodoro-config-input"
-                        type="number" 
-                        min="0" 
-                        value={configTemp.shortBreakLength} 
-                        onChange={handleTimerConfigShortLength} />
-                </label>
-                <label className="pomodoro-config-label">Long Break Length
-                    <input 
-                        className="pomodoro-config-input"
-                        type="number" 
-                        min="0" 
-                        value={configTemp.longBreakLength} 
-                        onChange={handleTimerConfigLongLength} />
-                </label>
-                <button onClick={handleConfigDefault}>Default Settings</button>
-                <button onClick={handleConfigSave}>Save Settings</button>
-                <button onClick={handleConfigCancel}>Cancel</button>
-            </div>
-            <button onClick={handleShowConfig}>Config</button>
-        </div>
+                        value={configTemp.interval}
+                        onChange={handleTimerConfigInterval}
+                    />
+                    <TextField
+                        label="Pomodoro Length"
+                        variant="standard"
+                        type="number"
+                        value={configTemp.length}
+                        onChange={handleTimerConfigPomodoroLengthChange}
+                    />
+                    <TextField
+                        label="Short Break Length"
+                        variant="standard"
+                        type="number"
+                        value={configTemp.shortBreakLength}
+                        onChange={handleTimerConfigShortLength}
+                    />
+                    <TextField
+                        label="Long Break Length"
+                        variant="standard"
+                        type="number"
+                        value={configTemp.longBreakLength}
+                        onChange={handleTimerConfigLongLength}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button variant="contained" onClick={handleConfigDefault}>Default Settings</Button>
+                    <Button variant="contained" onClick={handleConfigSave}>Save Settings</Button>
+                    <Button variant="contained" onClick={handleClickClose}>Cancel</Button>
+                </DialogActions>
+            </Dialog>
+            <Button variant="contained" onClick={handleClickOpen}>Config</Button>
+        </Box>
     )
 }
 
