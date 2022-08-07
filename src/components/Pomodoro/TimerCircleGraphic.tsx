@@ -1,4 +1,5 @@
 import React from 'react';
+import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress';
 
 export interface Props {
@@ -12,7 +13,10 @@ const TimerCircleGraphic: React.FC<Props> = (props) => {
     console.log(progress);
 
     return (
-        <CircularProgress sx={{margin: '2rem',}} size='5rem' variant="determinate" value={progress} />
+        <Box sx={{ position: 'relative' }}>
+            <CircularProgress sx={{margin: '2rem', color: '#e6e6e6',}} size='5rem' variant="determinate" value={100} />
+            <CircularProgress sx={{margin: '2rem', position: 'absolute', left: 0,}} size='5rem' variant="determinate" value={progress} />
+        </Box>
     )
 };
 
