@@ -75,13 +75,14 @@ body {
 
 .tasklist-component {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 50%;
     padding: 2em;
 }
 
-.add-task-description-input {
-    border-bottom: 
+.add-task-component {
+    display: flex;
+    flex-direction: column;
 }
 
 /********************/
@@ -91,7 +92,6 @@ body {
 .pomodoro-component {
     display: flex;
     justify-content: center;
-    width: 25%;
     padding: 2em;
 }
 

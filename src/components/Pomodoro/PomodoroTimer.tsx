@@ -1,6 +1,8 @@
 import React from 'react';
 import { PomodoroTimerType, PomodoroConfigType } from '../interfaces/pomodoro.interface';
 import Timer from './Timer';
+import TimerCircleGraphic from './TimerCircleGraphic';
+import Box from '@mui/material/Box';
 
 export interface Props {
     pomodoroTimer: PomodoroTimerType,
@@ -13,17 +15,17 @@ export interface Props {
 const PomodoroTimer: React.FC<Props> = (props) => {
     const setupPomodoro = () => {
         props.handleSetTimer(props.pomodoroConfig.length * 60, props.pomodoroTimer.interval + 1, false, false);
-        props.handleSetStep('Pomodoro');
+        props.handleSetStep('pomodoro');
     }
 
     const setupShortBreak= () => {
         props.handleSetTimer(props.pomodoroConfig.shortBreakLength * 60, props.pomodoroTimer.interval, false, true);
-        props.handleSetStep('Short Break');
+        props.handleSetStep('short-break');
     }
 
     const setupLongBreak = () => {
         props.handleSetTimer(props.pomodoroConfig.longBreakLength * 60, -1, false, true);
-        props.handleSetStep('Long Break');
+        props.handleSetStep('long-break');
     }
 
     const onTick = () => {
@@ -45,29 +47,29 @@ const PomodoroTimer: React.FC<Props> = (props) => {
         }
     }
 
-    // Handlers
-    // Pause Button
-    const handleTimerPause = (e: React.ChangeEvent<any>) => {
-        e.preventDefault();
-        props.handleSetTimer(props.pomodoroTimer.remaining, props.pomodoroTimer.interval, !props.pomodoroTimer.isActive, props.pomodoroTimer.isBreak);
-    }
+    let startTime = 0;
 
-    // Reset Button
-    const handleTimerReset = (e: React.ChangeEvent<any>) => {
-        e.preventDefault();
-        props.handleSetTimer(props.pomodoroConfig.length * 60, 1, false, false);
+    switch (props.pomodoroStep) {
+        case 'pomodoro':
+            startTime = props.pomodoroConfig.length;
+            break;
+        case 'short-break':
+            startTime = props.pomodoroConfig.shortBreakLength;
+            break;
+        case 'long-break':
+            startTime = props.pomodoroConfig.longBreakLength; 
     }
 
     return (
-        <div>
-            <h3>{props.pomodoroStep}</h3>
+        <Box sx={{margin: '1rem 0',}}>
+            <TimerCircleGraphic
+                startTime={startTime}
+                timeRemaining={props.pomodoroTimer.remaining} />
             <Timer 
                 timeRemaining={props.pomodoroTimer.remaining}
                 isActive={props.pomodoroTimer.isActive}
                 onTick={onTick} />
-            <button onClick={handleTimerPause}>Start/Stop</button>
-            <button onClick={handleTimerReset}>Reset</button>
-        </div>
+        </Box>
     )
 }
 

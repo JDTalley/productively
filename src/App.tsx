@@ -1,17 +1,36 @@
 import React from 'react';
 import Pomodoro from './components/Pomodoro/Pomodoro'
-//import PomodoroTimer from './components/PomodoroTimer'
-//import Timer from './components/Pomodoro/Timer'
 import TaskList from './components/tasks/TaskList';
+import Container from '@mui/material/Container';
+import { createTheme } from '@mui/material/styles';
+import ThemeProvider from '@mui/private-theming/ThemeProvider';
 import './App.css';
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: '#585858',
+        main: '#2f2f2f',
+        dark: '#050505',
+        contrastText: '#e6e6e6',
+      },
+      secondary: {
+        light: '#6cb9fc',
+        main: '#2f89c9',
+        dark: '#005c98',
+        contrastText: '#2f2f2f',
+      },
+    },
+  });
+
   return (
-    <div className="App">
-      <h1>Productivity</h1>
-      <div className="tasklist-component"><TaskList /></div>
-      <div className="pomodoro-component"><Pomodoro /></div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container sx={{display: 'flex', justifyContent: 'space-around',}}>
+        <TaskList />
+        <Pomodoro />
+      </Container>
+    </ThemeProvider>
   );
 }
 
