@@ -1,13 +1,13 @@
 import React from 'react';
 import Pomodoro from './components/Pomodoro/Pomodoro'
-import TaskList from './components/tasks/TaskList';
+import TaskList from './components/Task/TaskList';
 import Container from '@mui/material/Container';
 import { createTheme } from '@mui/material/styles';
 import ThemeProvider from '@mui/private-theming/ThemeProvider';
 import './App.css';
 
 function App() {
-  const theme = createTheme({
+  const darkTheme = createTheme({
     palette: {
       primary: {
         light: '#585858',
@@ -25,7 +25,7 @@ function App() {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <Container sx={{display: 'flex', justifyContent: 'space-around',}}>
         <TaskList />
         <Pomodoro />

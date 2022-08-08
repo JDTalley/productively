@@ -118,6 +118,9 @@ function Pomodoro() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 margin: '2rem 1rem',
+                border: '1px solid #585858',
+                borderRadius: '10px',
+                overflow: 'hidden',
             }}>
             <LinearProgress sx={{width: '100%', height: '.5em',}} variant="determinate" value={(timer.interval/config.interval) * 100} />
             <ToggleButtonGroup
@@ -136,7 +139,7 @@ function Pomodoro() {
                 pomodoroStep = {step}
                 handleSetTimer={handleSetTimer}
                 handleSetStep={handleSetStep} />
-            <ButtonGroup>
+            <ButtonGroup sx={{padding: '1rem 0',}}>
                 <Button variant="contained" onClick={handleTimerPause}>Start/Stop</Button>
                 <PomodoroConfig
                     pomodoroConfig={config}

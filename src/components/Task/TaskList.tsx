@@ -44,6 +44,9 @@ function TaskList() {
             flexDirection: 'column',
             alignItems: 'center',
             margin: '2rem 1rem',
+            border: '1px solid #585858',
+            borderRadius: '10px',
+            overflow: 'hidden',
         }}>
             <AddTaskItem addTaskItem={addTaskItem} />
             <List sx={{width: '100%', margin: '0 2em',}} dense={true}>
