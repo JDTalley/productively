@@ -44,12 +44,13 @@ function TaskList() {
             flexDirection: 'column',
             alignItems: 'center',
             margin: '2rem 1rem',
-            border: '1px solid #585858',
+            border: '1px solid #d1d1d1',
             borderRadius: '10px',
             overflow: 'hidden',
+
         }}>
             <AddTaskItem addTaskItem={addTaskItem} />
-            <List sx={{width: '100%', margin: '0 2em',}} dense={true}>
+            <List sx={{width: '100%', margin: '0 2em',maxHeight: '300px', overflow: 'auto',}} dense={true}>
                 {tasks.map((task, i) => {
                     return (
                         <TaskItem 

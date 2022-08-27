@@ -1,4 +1,3 @@
-import React from 'react';
 import Pomodoro from './components/Pomodoro/Pomodoro'
 import TaskList from './components/Task/TaskList';
 import Container from '@mui/material/Container';

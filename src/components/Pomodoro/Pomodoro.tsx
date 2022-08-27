@@ -118,7 +118,7 @@ function Pomodoro() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 margin: '2rem 1rem',
-                border: '1px solid #585858',
+                border: '1px solid #d1d1d1',
                 borderRadius: '10px',
                 overflow: 'hidden',
             }}>
