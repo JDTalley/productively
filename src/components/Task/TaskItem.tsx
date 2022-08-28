@@ -21,29 +21,36 @@ const TaskItem: React.FC<Props> = (props) => {
     const [isEditable, setIsEditable] = useState(false);
 
     const handleCheckboxChange = () => {
-        props.updateTaskItem({
-            ...props.task,
-            isComplete: !props.task.isComplete
-        });
+        if (!isEditable) {
+            props.updateTaskItem({
+                ...props.task,
+                isComplete: !props.task.isComplete
+            });
+        }
     };
 
     const handleEditClick = () => {
-        setIsEditable(true);
+        setIsEditable(!isEditable);
     }
 
     const handleDeleteClick = () => {
         props.deleteTaskItem(props.task);
     };
 
-    const handleDescriptionChange = (e: React.ChangeEvent<any>) => {
+    const handleNameChange = (e: React.ChangeEvent<any>) => {
         setTempName(e.target.value);
+
+        props.updateTaskItem({
+            ...props.task,
+            name: e.target.value
+        });
     };
 
     return (
         <ListItem
             secondaryAction={
                 <ButtonGroup>
-                    <IconButton disabled onClick={handleEditClick}>
+                    <IconButton onClick={handleEditClick}>
                         <EditIcon />  
                     </IconButton>
                     <IconButton onClick={handleDeleteClick}>
@@ -52,16 +59,19 @@ const TaskItem: React.FC<Props> = (props) => {
                 </ButtonGroup>
             }>
             <ListItemButton onClick={handleCheckboxChange}>
-                <Checkbox checked={props.task.isComplete} />
                 {isEditable
                     ? <TextField 
                         id="filled-basic" 
                         label="Enter Task" 
-                        variant="filled" 
+                        variant="standard" 
                         value={tempName} 
-                        onChange={handleDescriptionChange}
+                        onChange={handleNameChange}
                         />
-                    : <ListItemText primary={props.task.name} /> 
+                    : 
+                    <>
+                        <Checkbox checked={props.task.isComplete} />
+                        <ListItemText primary={props.task.name} /> 
+                    </>
                 }
             </ListItemButton>
         </ListItem>
