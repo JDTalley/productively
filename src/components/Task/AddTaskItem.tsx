@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 
 export interface Props {
     addTaskItem: Function
@@ -9,17 +8,19 @@ export interface Props {
 
 const AddTaskItem: React.FC<Props> = (props) => {
     const [itemTemp, setItemTemp] = useState({
+        name: '',
         description: '',
         isComplete: false
     });
 
     //const [isActive, setIsActive] = useState(false);
 
-    const handleDescriptionChange = (e: React.ChangeEvent<any>) => {
+    const handleNameChange = (e: React.ChangeEvent<any>) => {
         e.preventDefault();
 
         setItemTemp({
-            description: e.target.value,
+            name: e.target.value,
+            description: '',
             isComplete: false
         });
     };
@@ -29,6 +30,7 @@ const AddTaskItem: React.FC<Props> = (props) => {
             props.addTaskItem(itemTemp);
 
             setItemTemp({
+                name: '',
                 description: '',
                 isComplete: false
             });
@@ -53,8 +55,8 @@ const AddTaskItem: React.FC<Props> = (props) => {
                 margin="none"
                 InputLabelProps={{sx:{padding: '0 .5em'}}}
                 InputProps={{sx:{padding: '0 .5em'}}}
-                value={itemTemp.description} 
-                onChange={handleDescriptionChange}
+                value={itemTemp.name} 
+                onChange={handleNameChange}
                 onKeyPress={handleAddTask} />
                 {/* <Button variant="contained" onClick={handleAddTaskButton}>Finish</Button> */}
             </Box>

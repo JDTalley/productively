@@ -12,35 +12,45 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 export interface Props {
     task: TaskType,
-    toggleComplete: Function,
+    updateTaskItem: Function,
     deleteTaskItem: Function
 };
 
 const TaskItem: React.FC<Props> = (props) => {
-    const [tempDesc, setTempDesc] = useState(props.task.description);
+    const [tempName, setTempName] = useState(props.task.name);
     const [isEditable, setIsEditable] = useState(false);
 
     const handleCheckboxChange = () => {
-        props.toggleComplete(props.task);
+        if (!isEditable) {
+            props.updateTaskItem({
+                ...props.task,
+                isComplete: !props.task.isComplete
+            });
+        }
     };
 
     const handleEditClick = () => {
-        setIsEditable(true);
+        setIsEditable(!isEditable);
     }
 
     const handleDeleteClick = () => {
         props.deleteTaskItem(props.task);
     };
 
-    const handleDescriptionChange = (e: React.ChangeEvent<any>) => {
-        setTempDesc(e.target.value);
+    const handleNameChange = (e: React.ChangeEvent<any>) => {
+        setTempName(e.target.value);
+
+        props.updateTaskItem({
+            ...props.task,
+            name: e.target.value
+        });
     };
 
     return (
         <ListItem
             secondaryAction={
                 <ButtonGroup>
-                    <IconButton disabled onClick={handleEditClick}>
+                    <IconButton onClick={handleEditClick}>
                         <EditIcon />  
                     </IconButton>
                     <IconButton onClick={handleDeleteClick}>
@@ -49,16 +59,19 @@ const TaskItem: React.FC<Props> = (props) => {
                 </ButtonGroup>
             }>
             <ListItemButton onClick={handleCheckboxChange}>
-                <Checkbox checked={props.task.isComplete} />
                 {isEditable
                     ? <TextField 
                         id="filled-basic" 
                         label="Enter Task" 
-                        variant="filled" 
-                        value={tempDesc} 
-                        onChange={handleDescriptionChange}
+                        variant="standard" 
+                        value={tempName} 
+                        onChange={handleNameChange}
                         />
-                    : <ListItemText primary={props.task.description} /> 
+                    : 
+                    <>
+                        <Checkbox checked={props.task.isComplete} />
+                        <ListItemText primary={props.task.name} /> 
+                    </>
                 }
             </ListItemButton>
         </ListItem>
