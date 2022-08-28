@@ -12,16 +12,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 export interface Props {
     task: TaskType,
-    toggleComplete: Function,
+    updateTaskItem: Function,
     deleteTaskItem: Function
 };
 
 const TaskItem: React.FC<Props> = (props) => {
-    const [tempDesc, setTempDesc] = useState(props.task.description);
+    const [tempName, setTempName] = useState(props.task.name);
     const [isEditable, setIsEditable] = useState(false);
 
     const handleCheckboxChange = () => {
-        props.toggleComplete(props.task);
+        props.updateTaskItem({
+            ...props.task,
+            isComplete: !props.task.isComplete
+        });
     };
 
     const handleEditClick = () => {
@@ -33,7 +36,7 @@ const TaskItem: React.FC<Props> = (props) => {
     };
 
     const handleDescriptionChange = (e: React.ChangeEvent<any>) => {
-        setTempDesc(e.target.value);
+        setTempName(e.target.value);
     };
 
     return (
@@ -55,10 +58,10 @@ const TaskItem: React.FC<Props> = (props) => {
                         id="filled-basic" 
                         label="Enter Task" 
                         variant="filled" 
-                        value={tempDesc} 
+                        value={tempName} 
                         onChange={handleDescriptionChange}
                         />
-                    : <ListItemText primary={props.task.description} /> 
+                    : <ListItemText primary={props.task.name} /> 
                 }
             </ListItemButton>
         </ListItem>

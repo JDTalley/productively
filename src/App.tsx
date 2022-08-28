@@ -5,6 +5,11 @@ import { createTheme } from '@mui/material/styles';
 import ThemeProvider from '@mui/private-theming/ThemeProvider';
 import './App.css';
 
+import { Amplify } from 'aws-amplify';
+import awsExports from './aws-exports';
+
+Amplify.configure(awsExports);
+
 function App() {
   const darkTheme = createTheme({
     palette: {

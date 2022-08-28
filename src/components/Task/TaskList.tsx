@@ -1,40 +1,77 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { listTodos, createTodo, updateTodo, deleteTodo } from '../../graphql';
+
 import { TaskType } from '../interfaces/taskList.interface';
 import TaskItem from './TaskItem';
 import AddTaskItem from './AddTaskItem';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 
-function TaskList() {
+import awsExports from '../../aws-exports'
+Amplify.configure(awsExports);
+
+const TaskList = () => {
     const [tasks, setTasks] = useState<TaskType[]>([]);
 
-    const addTaskItem = (task: TaskType) => {
-        setTasks(prevTasks => [
-            ...prevTasks,
-            task,
-          ])
+    useEffect(() => {
+        fetchTasks()
+    }, []);
+
+    async function fetchTasks() {
+        try {
+            const taskData = (
+                await API.graphql(graphqlOperation(listTodos))
+            ) as any;
+            const tasks = taskData.data.listTodos.items;
+            setTasks(tasks);
+        } catch (err) { console.log('Error fetching tasks.')};
     }
 
-    const deleteTaskItem = (selectedTask: TaskType) => {
-        const newTasks = tasks.filter((task) => {
-            return task !== selectedTask;
-        });
+    async function addTaskItem(task: TaskType) {
+        try {
+            setTasks(prevTasks => [
+                ...prevTasks,
+                task,
+            ]);
 
-        setTasks(newTasks);
+            await API.graphql(graphqlOperation(createTodo, {input: task}));
+        } catch (err) {
+            console.log('Error creating todo:', err)
+        }
     }
 
-    const toggleComplete = (selectedTask: TaskType) => {
-        const newTasks = tasks.map((task) => {
-            if (task === selectedTask) {
-                return {
-                    ...task,
-                    isComplete: !task.isComplete
-                };
-            }
-            return task;
-        });
+    async function updateTaskItem(selectedTask: TaskType) {
+        try {
+            const newTasks = tasks.map((task) => {
+                if (task.id === selectedTask.id) {
+                    return {
+                        ...selectedTask
+                    };
+                }
+                return task;
+            });
 
-        setTasks(newTasks);
+            setTasks(newTasks);
+
+            await API.graphql(graphqlOperation(updateTodo, {input: {id: selectedTask.id, name: selectedTask.name, isComplete: selectedTask.isComplete}}));
+        } catch(err) {
+            console.log('Error updating task:', err);
+        }
+    }
+
+    async function deleteTaskItem(selectedTask: TaskType) {
+        try {
+            const oldTask = tasks.filter((task) => {
+                return task !== selectedTask;
+            });
+    
+            setTasks(oldTask);
+
+            await API.graphql(graphqlOperation(deleteTodo, {input: {id: selectedTask.id}}));
+        } catch (err) {
+            console.log('Error deleting todo:', err);
+        }
     }
 
     return (
@@ -56,7 +93,7 @@ function TaskList() {
                         <TaskItem 
                             key={i} 
                             task={task} 
-                            toggleComplete={toggleComplete}
+                            updateTaskItem={updateTaskItem}
                             deleteTaskItem={deleteTaskItem} />
                     )
                 })}

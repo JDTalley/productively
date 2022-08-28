@@ -10,8 +10,6 @@ export interface Props {
 const TimerCircleGraphic: React.FC<Props> = (props) => {
     const progress = ((props.startTime * 60 - props.timeRemaining) / (props.startTime * 60)) * 100
 
-    console.log(progress);
-
     return (
         <Box sx={{ position: 'relative' }}>
             <CircularProgress sx={{margin: '2rem', color: '#e6e6e6',}} size='5rem' variant="determinate" value={100} />
