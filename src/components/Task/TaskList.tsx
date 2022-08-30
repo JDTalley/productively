@@ -25,17 +25,22 @@ const TaskList = () => {
             ) as any;
             const tasks = taskData.data.listTodos.items;
             setTasks(tasks);
-        } catch (err) { console.log('Error fetching tasks.')};
+        } catch (err) { console.log('Error fetching tasks:', err)};
     }
 
     async function addTaskItem(task: TaskType) {
         try {
+            const taskData = (
+                await API.graphql(graphqlOperation(createTodo, {input: task}))
+            ) as any;
+
+            const newTask = taskData.data.createTodo;
+
             setTasks(prevTasks => [
                 ...prevTasks,
-                task,
+                newTask,
             ]);
 
-            await API.graphql(graphqlOperation(createTodo, {input: task}));
         } catch (err) {
             console.log('Error creating todo:', err)
         }

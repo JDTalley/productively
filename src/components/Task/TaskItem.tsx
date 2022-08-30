@@ -9,6 +9,8 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 export interface Props {
     task: TaskType,
@@ -37,25 +39,58 @@ const TaskItem: React.FC<Props> = (props) => {
         props.deleteTaskItem(props.task);
     };
 
-    const handleNameChange = (e: React.ChangeEvent<any>) => {
-        setTempName(e.target.value);
-
+    const handleConfirmClick = () => {
         props.updateTaskItem({
             ...props.task,
-            name: e.target.value
+            name: tempName
         });
+
+        setIsEditable(!isEditable);
+    }
+
+    const handleKeyPress = (e: React.KeyboardEvent<any>) => {
+        if (e.key === 'Enter') {
+            setIsEditable(!isEditable);
+
+            props.updateTaskItem({
+                ...props.task,
+                name: tempName
+            });
+        }
+    }
+
+    const handleCancelClick = () => {
+        setTempName(props.task.name);
+
+        setIsEditable(!isEditable);
+    }
+
+    const handleNameChange = (e: React.ChangeEvent<any>) => {
+        setTempName(e.target.value);
     };
 
     return (
         <ListItem
             secondaryAction={
                 <ButtonGroup>
-                    <IconButton onClick={handleEditClick}>
-                        <EditIcon />  
-                    </IconButton>
-                    <IconButton onClick={handleDeleteClick}>
-                        <DeleteIcon /> 
-                    </IconButton>
+                    {isEditable
+                        ?   <ButtonGroup>
+                                <IconButton onClick={handleConfirmClick}>
+                                    <CheckCircleIcon />  
+                                </IconButton>
+                                <IconButton onClick={handleCancelClick}>
+                                    <CancelIcon /> 
+                                </IconButton>
+                            </ButtonGroup>
+                        :   <ButtonGroup>
+                                <IconButton onClick={handleEditClick}>
+                                    <EditIcon />  
+                                </IconButton>
+                                <IconButton onClick={handleDeleteClick}>
+                                    <DeleteIcon /> 
+                                </IconButton>
+                            </ButtonGroup>
+                        }
                 </ButtonGroup>
             }>
             <ListItemButton onClick={handleCheckboxChange}>
@@ -66,6 +101,7 @@ const TaskItem: React.FC<Props> = (props) => {
                         variant="standard" 
                         value={tempName} 
                         onChange={handleNameChange}
+                        onKeyPress={handleKeyPress}
                         />
                     : 
                     <>

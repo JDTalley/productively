@@ -16,7 +16,7 @@ const AddTaskItem: React.FC<Props> = (props) => {
     //const [isActive, setIsActive] = useState(false);
 
     const handleNameChange = (e: React.ChangeEvent<any>) => {
-        e.preventDefault();
+        //e.preventDefault();
 
         setItemTemp({
             name: e.target.value,
