@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onCreateTodo(filter: $filter) {
+  subscription OnCreateTodo($createdBy: String) {
+    onCreateTodo(createdBy: $createdBy) {
       id
       name
       description
@@ -13,6 +13,7 @@ export const onCreateTodo = /* GraphQL */ `
           id
           name
           description
+          createdBy
           createdAt
           updatedAt
           todoCategoriesId
@@ -20,14 +21,15 @@ export const onCreateTodo = /* GraphQL */ `
         nextToken
       }
       isComplete
+      createdBy
       createdAt
       updatedAt
     }
   }
 `;
 export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onUpdateTodo(filter: $filter) {
+  subscription OnUpdateTodo($createdBy: String) {
+    onUpdateTodo(createdBy: $createdBy) {
       id
       name
       description
@@ -36,6 +38,7 @@ export const onUpdateTodo = /* GraphQL */ `
           id
           name
           description
+          createdBy
           createdAt
           updatedAt
           todoCategoriesId
@@ -43,14 +46,15 @@ export const onUpdateTodo = /* GraphQL */ `
         nextToken
       }
       isComplete
+      createdBy
       createdAt
       updatedAt
     }
   }
 `;
 export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onDeleteTodo(filter: $filter) {
+  subscription OnDeleteTodo($createdBy: String) {
+    onDeleteTodo(createdBy: $createdBy) {
       id
       name
       description
@@ -59,6 +63,7 @@ export const onDeleteTodo = /* GraphQL */ `
           id
           name
           description
+          createdBy
           createdAt
           updatedAt
           todoCategoriesId
@@ -66,17 +71,19 @@ export const onDeleteTodo = /* GraphQL */ `
         nextToken
       }
       isComplete
+      createdBy
       createdAt
       updatedAt
     }
   }
 `;
 export const onCreateCategory = /* GraphQL */ `
-  subscription OnCreateCategory($filter: ModelSubscriptionCategoryFilterInput) {
-    onCreateCategory(filter: $filter) {
+  subscription OnCreateCategory($createdBy: String) {
+    onCreateCategory(createdBy: $createdBy) {
       id
       name
       description
+      createdBy
       createdAt
       updatedAt
       todoCategoriesId
@@ -84,11 +91,12 @@ export const onCreateCategory = /* GraphQL */ `
   }
 `;
 export const onUpdateCategory = /* GraphQL */ `
-  subscription OnUpdateCategory($filter: ModelSubscriptionCategoryFilterInput) {
-    onUpdateCategory(filter: $filter) {
+  subscription OnUpdateCategory($createdBy: String) {
+    onUpdateCategory(createdBy: $createdBy) {
       id
       name
       description
+      createdBy
       createdAt
       updatedAt
       todoCategoriesId
@@ -96,11 +104,12 @@ export const onUpdateCategory = /* GraphQL */ `
   }
 `;
 export const onDeleteCategory = /* GraphQL */ `
-  subscription OnDeleteCategory($filter: ModelSubscriptionCategoryFilterInput) {
-    onDeleteCategory(filter: $filter) {
+  subscription OnDeleteCategory($createdBy: String) {
+    onDeleteCategory(createdBy: $createdBy) {
       id
       name
       description
+      createdBy
       createdAt
       updatedAt
       todoCategoriesId

@@ -5,6 +5,7 @@ type Todo {
   description: String
   categories(filter: ModelCategoryFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelCategoryConnection
   isComplete: Boolean
+  createdBy: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }
@@ -12,7 +13,8 @@ type Todo {
 type Category {
   id: ID!
   name: String!
-  description: String!
+  description: String
+  createdBy: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   todoCategoriesId: ID
@@ -178,6 +180,7 @@ input ModelTodoFilterInput {
   name: ModelStringInput
   description: ModelStringInput
   isComplete: ModelBooleanInput
+  createdBy: ModelStringInput
   and: [ModelTodoFilterInput]
   or: [ModelTodoFilterInput]
   not: ModelTodoFilterInput
@@ -194,6 +197,7 @@ input ModelTodoConditionInput {
   name: ModelStringInput
   description: ModelStringInput
   isComplete: ModelBooleanInput
+  createdBy: ModelStringInput
   and: [ModelTodoConditionInput]
   or: [ModelTodoConditionInput]
   not: ModelTodoConditionInput
@@ -204,6 +208,7 @@ input CreateTodoInput {
   name: String!
   description: String
   isComplete: Boolean
+  createdBy: String
 }
 
 input UpdateTodoInput {
@@ -211,6 +216,7 @@ input UpdateTodoInput {
   name: String
   description: String
   isComplete: Boolean
+  createdBy: String
 }
 
 input DeleteTodoInput {
@@ -236,12 +242,12 @@ input ModelSubscriptionTodoFilterInput {
 }
 
 type Subscription {
-  onCreateTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["createTodo"])
-  onUpdateTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["updateTodo"])
-  onDeleteTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["deleteTodo"])
-  onCreateCategory(filter: ModelSubscriptionCategoryFilterInput): Category @aws_subscribe(mutations: ["createCategory"])
-  onUpdateCategory(filter: ModelSubscriptionCategoryFilterInput): Category @aws_subscribe(mutations: ["updateCategory"])
-  onDeleteCategory(filter: ModelSubscriptionCategoryFilterInput): Category @aws_subscribe(mutations: ["deleteCategory"])
+  onCreateTodo(createdBy: String): Todo @aws_subscribe(mutations: ["createTodo"])
+  onUpdateTodo(createdBy: String): Todo @aws_subscribe(mutations: ["updateTodo"])
+  onDeleteTodo(createdBy: String): Todo @aws_subscribe(mutations: ["deleteTodo"])
+  onCreateCategory(createdBy: String): Category @aws_subscribe(mutations: ["createCategory"])
+  onUpdateCategory(createdBy: String): Category @aws_subscribe(mutations: ["updateCategory"])
+  onDeleteCategory(createdBy: String): Category @aws_subscribe(mutations: ["deleteCategory"])
 }
 
 type ModelCategoryConnection {
@@ -253,6 +259,7 @@ input ModelCategoryFilterInput {
   id: ModelIDInput
   name: ModelStringInput
   description: ModelStringInput
+  createdBy: ModelStringInput
   and: [ModelCategoryFilterInput]
   or: [ModelCategoryFilterInput]
   not: ModelCategoryFilterInput
@@ -262,6 +269,7 @@ input ModelCategoryFilterInput {
 input ModelCategoryConditionInput {
   name: ModelStringInput
   description: ModelStringInput
+  createdBy: ModelStringInput
   and: [ModelCategoryConditionInput]
   or: [ModelCategoryConditionInput]
   not: ModelCategoryConditionInput
@@ -271,7 +279,8 @@ input ModelCategoryConditionInput {
 input CreateCategoryInput {
   id: ID
   name: String!
-  description: String!
+  description: String
+  createdBy: String
   todoCategoriesId: ID
 }
 
@@ -279,6 +288,7 @@ input UpdateCategoryInput {
   id: ID!
   name: String
   description: String
+  createdBy: String
   todoCategoriesId: ID
 }
 

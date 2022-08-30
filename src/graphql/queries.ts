@@ -13,6 +13,7 @@ export const getTodo = /* GraphQL */ `
           id
           name
           description
+          createdBy
           createdAt
           updatedAt
           todoCategoriesId
@@ -20,6 +21,7 @@ export const getTodo = /* GraphQL */ `
         nextToken
       }
       isComplete
+      createdBy
       createdAt
       updatedAt
     }
@@ -40,6 +42,7 @@ export const listTodos = /* GraphQL */ `
           nextToken
         }
         isComplete
+        createdBy
         createdAt
         updatedAt
       }
@@ -53,6 +56,7 @@ export const getCategory = /* GraphQL */ `
       id
       name
       description
+      createdBy
       createdAt
       updatedAt
       todoCategoriesId
@@ -70,6 +74,7 @@ export const listCategories = /* GraphQL */ `
         id
         name
         description
+        createdBy
         createdAt
         updatedAt
         todoCategoriesId

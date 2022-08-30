@@ -16,16 +16,33 @@
     "productively": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "productivelye0fcc713",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authproductivelye0fcc713"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 7,
+                "apiKeyExpirationDate": "2022-09-06T21:56:00.517Z",
+                "description": "productively-api"
+              }
+            }
+          ]
         },
         "GraphQLAPIIdOutput": "ldvl27nne5fjzhksbaiha43pnu",
         "GraphQLAPIEndpointOutput": "https://zeh7soeebfb35mngnypknmehj4.appsync-api.us-east-1.amazonaws.com/graphql",
@@ -35,8 +52,53 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-productively-dev-115727-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiproductively"
       },
-      "lastPushTimeStamp": "2022-08-28T01:27:09.013Z",
-      "lastPushDirHash": "eQfLZby15O7MXDeGuWiJdVNNyus="
+      "lastPushTimeStamp": "2022-08-30T22:01:05.126Z",
+      "lastPushDirHash": "y4S0y1hNLC7QaYszdov0N2ybkqw="
+    }
+  },
+  "auth": {
+    "productivelye0fcc713": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-productively-dev-115727-deployment/amplify-cfn-templates/auth/productivelye0fcc713-cloudformation-template.json",
+        "logicalId": "authproductivelye0fcc713"
+      },
+      "lastPushTimeStamp": "2022-08-30T22:01:05.154Z",
+      "output": {
+        "UserPoolId": "us-east-1_jW4VZ7Al0",
+        "AppClientIDWeb": "1btsq6dpvno65jnppu13ffrd9d",
+        "AppClientID": "4oftv79ak4hlsjsnp3ig9ner82",
+        "HostedUIDomain": "productivelye0fcc713-e0fcc713-dev",
+        "IdentityPoolId": "us-east-1:4afbabad-9a69-4353-9689-dd09e7efd944",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:714341196257:userpool/us-east-1_jW4VZ7Al0",
+        "IdentityPoolName": "productivelye0fcc713_identitypool_e0fcc713__dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
+        "UserPoolName": "productivelye0fcc713_userpool_e0fcc713"
+      },
+      "lastPushDirHash": "IMS18U6fK15Sim29RrqVqHW4gFc="
     }
   }
 }

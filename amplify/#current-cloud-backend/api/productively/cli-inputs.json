@@ -4,8 +4,17 @@
     "apiName": "productively",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "API_KEY",
-      "expirationTime": 7
-    }
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authproductivelye0fcc713"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 7,
+        "apiKeyExpirationDate": "2022-09-06T21:56:00.517Z",
+        "keyDescription": "productively-api"
+      }
+    ],
+    "conflictResolution": {}
   }
 }

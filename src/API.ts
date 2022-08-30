@@ -7,12 +7,14 @@ export type CreateTodoInput = {
   name: string,
   description?: string | null,
   isComplete?: boolean | null,
+  createdBy?: string | null,
 };
 
 export type ModelTodoConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   isComplete?: ModelBooleanInput | null,
+  createdBy?: ModelStringInput | null,
   and?: Array< ModelTodoConditionInput | null > | null,
   or?: Array< ModelTodoConditionInput | null > | null,
   not?: ModelTodoConditionInput | null,
@@ -72,6 +74,7 @@ export type Todo = {
   description?: string | null,
   categories?: ModelCategoryConnection | null,
   isComplete?: boolean | null,
+  createdBy?: string | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -86,7 +89,8 @@ export type Category = {
   __typename: "Category",
   id: string,
   name: string,
-  description: string,
+  description?: string | null,
+  createdBy?: string | null,
   createdAt: string,
   updatedAt: string,
   todoCategoriesId?: string | null,
@@ -97,6 +101,7 @@ export type UpdateTodoInput = {
   name?: string | null,
   description?: string | null,
   isComplete?: boolean | null,
+  createdBy?: string | null,
 };
 
 export type DeleteTodoInput = {
@@ -106,13 +111,15 @@ export type DeleteTodoInput = {
 export type CreateCategoryInput = {
   id?: string | null,
   name: string,
-  description: string,
+  description?: string | null,
+  createdBy?: string | null,
   todoCategoriesId?: string | null,
 };
 
 export type ModelCategoryConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
+  createdBy?: ModelStringInput | null,
   and?: Array< ModelCategoryConditionInput | null > | null,
   or?: Array< ModelCategoryConditionInput | null > | null,
   not?: ModelCategoryConditionInput | null,
@@ -139,6 +146,7 @@ export type UpdateCategoryInput = {
   id: string,
   name?: string | null,
   description?: string | null,
+  createdBy?: string | null,
   todoCategoriesId?: string | null,
 };
 
@@ -151,6 +159,7 @@ export type ModelTodoFilterInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   isComplete?: ModelBooleanInput | null,
+  createdBy?: ModelStringInput | null,
   and?: Array< ModelTodoFilterInput | null > | null,
   or?: Array< ModelTodoFilterInput | null > | null,
   not?: ModelTodoFilterInput | null,
@@ -166,62 +175,11 @@ export type ModelCategoryFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
+  createdBy?: ModelStringInput | null,
   and?: Array< ModelCategoryFilterInput | null > | null,
   or?: Array< ModelCategoryFilterInput | null > | null,
   not?: ModelCategoryFilterInput | null,
   todoCategoriesId?: ModelIDInput | null,
-};
-
-export type ModelSubscriptionTodoFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  isComplete?: ModelSubscriptionBooleanInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-};
-
-export type ModelSubscriptionIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
-};
-
-export type ModelSubscriptionCategoryFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionCategoryFilterInput | null > | null,
-  or?: Array< ModelSubscriptionCategoryFilterInput | null > | null,
 };
 
 export type CreateTodoMutationVariables = {
@@ -241,7 +199,8 @@ export type CreateTodoMutation = {
         __typename: "Category",
         id: string,
         name: string,
-        description: string,
+        description?: string | null,
+        createdBy?: string | null,
         createdAt: string,
         updatedAt: string,
         todoCategoriesId?: string | null,
@@ -249,6 +208,7 @@ export type CreateTodoMutation = {
       nextToken?: string | null,
     } | null,
     isComplete?: boolean | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -271,7 +231,8 @@ export type UpdateTodoMutation = {
         __typename: "Category",
         id: string,
         name: string,
-        description: string,
+        description?: string | null,
+        createdBy?: string | null,
         createdAt: string,
         updatedAt: string,
         todoCategoriesId?: string | null,
@@ -279,6 +240,7 @@ export type UpdateTodoMutation = {
       nextToken?: string | null,
     } | null,
     isComplete?: boolean | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -301,7 +263,8 @@ export type DeleteTodoMutation = {
         __typename: "Category",
         id: string,
         name: string,
-        description: string,
+        description?: string | null,
+        createdBy?: string | null,
         createdAt: string,
         updatedAt: string,
         todoCategoriesId?: string | null,
@@ -309,6 +272,7 @@ export type DeleteTodoMutation = {
       nextToken?: string | null,
     } | null,
     isComplete?: boolean | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -324,7 +288,8 @@ export type CreateCategoryMutation = {
     __typename: "Category",
     id: string,
     name: string,
-    description: string,
+    description?: string | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
     todoCategoriesId?: string | null,
@@ -341,7 +306,8 @@ export type UpdateCategoryMutation = {
     __typename: "Category",
     id: string,
     name: string,
-    description: string,
+    description?: string | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
     todoCategoriesId?: string | null,
@@ -358,7 +324,8 @@ export type DeleteCategoryMutation = {
     __typename: "Category",
     id: string,
     name: string,
-    description: string,
+    description?: string | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
     todoCategoriesId?: string | null,
@@ -381,7 +348,8 @@ export type GetTodoQuery = {
         __typename: "Category",
         id: string,
         name: string,
-        description: string,
+        description?: string | null,
+        createdBy?: string | null,
         createdAt: string,
         updatedAt: string,
         todoCategoriesId?: string | null,
@@ -389,6 +357,7 @@ export type GetTodoQuery = {
       nextToken?: string | null,
     } | null,
     isComplete?: boolean | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -413,6 +382,7 @@ export type ListTodosQuery = {
         nextToken?: string | null,
       } | null,
       isComplete?: boolean | null,
+      createdBy?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -429,7 +399,8 @@ export type GetCategoryQuery = {
     __typename: "Category",
     id: string,
     name: string,
-    description: string,
+    description?: string | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
     todoCategoriesId?: string | null,
@@ -449,7 +420,8 @@ export type ListCategoriesQuery = {
       __typename: "Category",
       id: string,
       name: string,
-      description: string,
+      description?: string | null,
+      createdBy?: string | null,
       createdAt: string,
       updatedAt: string,
       todoCategoriesId?: string | null,
@@ -459,7 +431,7 @@ export type ListCategoriesQuery = {
 };
 
 export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+  createdBy?: string | null,
 };
 
 export type OnCreateTodoSubscription = {
@@ -474,7 +446,8 @@ export type OnCreateTodoSubscription = {
         __typename: "Category",
         id: string,
         name: string,
-        description: string,
+        description?: string | null,
+        createdBy?: string | null,
         createdAt: string,
         updatedAt: string,
         todoCategoriesId?: string | null,
@@ -482,13 +455,14 @@ export type OnCreateTodoSubscription = {
       nextToken?: string | null,
     } | null,
     isComplete?: boolean | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+  createdBy?: string | null,
 };
 
 export type OnUpdateTodoSubscription = {
@@ -503,7 +477,8 @@ export type OnUpdateTodoSubscription = {
         __typename: "Category",
         id: string,
         name: string,
-        description: string,
+        description?: string | null,
+        createdBy?: string | null,
         createdAt: string,
         updatedAt: string,
         todoCategoriesId?: string | null,
@@ -511,13 +486,14 @@ export type OnUpdateTodoSubscription = {
       nextToken?: string | null,
     } | null,
     isComplete?: boolean | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+  createdBy?: string | null,
 };
 
 export type OnDeleteTodoSubscription = {
@@ -532,7 +508,8 @@ export type OnDeleteTodoSubscription = {
         __typename: "Category",
         id: string,
         name: string,
-        description: string,
+        description?: string | null,
+        createdBy?: string | null,
         createdAt: string,
         updatedAt: string,
         todoCategoriesId?: string | null,
@@ -540,13 +517,14 @@ export type OnDeleteTodoSubscription = {
       nextToken?: string | null,
     } | null,
     isComplete?: boolean | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type OnCreateCategorySubscriptionVariables = {
-  filter?: ModelSubscriptionCategoryFilterInput | null,
+  createdBy?: string | null,
 };
 
 export type OnCreateCategorySubscription = {
@@ -554,7 +532,8 @@ export type OnCreateCategorySubscription = {
     __typename: "Category",
     id: string,
     name: string,
-    description: string,
+    description?: string | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
     todoCategoriesId?: string | null,
@@ -562,7 +541,7 @@ export type OnCreateCategorySubscription = {
 };
 
 export type OnUpdateCategorySubscriptionVariables = {
-  filter?: ModelSubscriptionCategoryFilterInput | null,
+  createdBy?: string | null,
 };
 
 export type OnUpdateCategorySubscription = {
@@ -570,7 +549,8 @@ export type OnUpdateCategorySubscription = {
     __typename: "Category",
     id: string,
     name: string,
-    description: string,
+    description?: string | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
     todoCategoriesId?: string | null,
@@ -578,7 +558,7 @@ export type OnUpdateCategorySubscription = {
 };
 
 export type OnDeleteCategorySubscriptionVariables = {
-  filter?: ModelSubscriptionCategoryFilterInput | null,
+  createdBy?: string | null,
 };
 
 export type OnDeleteCategorySubscription = {
@@ -586,7 +566,8 @@ export type OnDeleteCategorySubscription = {
     __typename: "Category",
     id: string,
     name: string,
-    description: string,
+    description?: string | null,
+    createdBy?: string | null,
     createdAt: string,
     updatedAt: string,
     todoCategoriesId?: string | null,

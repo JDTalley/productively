@@ -1,5 +1,35 @@
 {
   "Resources": {
+    "Todocategoriesauth0FunctionTodocategoriesauth0FunctionAppSyncFunctionA7485AC5": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "DataSourceName": {
+          "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
+        },
+        "FunctionVersion": "2018-05-29",
+        "Name": "Todocategoriesauth0Function",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/Todo.categories.auth.1.req.vtl"
+            ]
+          ]
+        },
+        "ResponseMappingTemplate": "$util.toJson({})"
+      }
+    },
     "TodoCategoriesDataResolverFnTodoCategoriesDataResolverFnAppSyncFunction2D24D726": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
@@ -58,6 +88,12 @@
           "Functions": [
             {
               "Fn::GetAtt": [
+                "Todocategoriesauth0FunctionTodocategoriesauth0FunctionAppSyncFunctionA7485AC5",
+                "FunctionId"
+              ]
+            },
+            {
+              "Fn::GetAtt": [
                 "TodoCategoriesDataResolverFnTodoCategoriesDataResolverFnAppSyncFunction2D24D726",
                 "FunctionId"
               ]
@@ -88,13 +124,16 @@
     "referencetotransformerrootstackGraphQLAPI20497F53ApiId": {
       "Type": "String"
     },
-    "referencetotransformerrootstackCategoryNestedStackCategoryNestedStackResourceD9545530OutputstransformerrootstackCategoryCategoryDataSource9AF16D52Name": {
+    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
       "Type": "String"
     },
     "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
       "Type": "String"
     },
     "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackCategoryNestedStackCategoryNestedStackResourceD9545530OutputstransformerrootstackCategoryCategoryDataSource9AF16D52Name": {
       "Type": "String"
     },
     "referencetotransformerrootstackCategoryNestedStackCategoryNestedStackResourceD9545530OutputstransformerrootstackCategoryCategoryTable44E1EFF7Ref": {

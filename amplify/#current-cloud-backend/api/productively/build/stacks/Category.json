@@ -49,7 +49,13 @@
     "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
       "Type": "String"
     },
+    "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodoauth0FunctionQuerygetTodoauth0FunctionAppSyncFunction9F8E8363FunctionId": {
+      "Type": "String"
+    },
     "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
       "Type": "String"
     },
     "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoMutationcreateTodoinit0FunctionMutationcreateTodoinit0FunctionAppSyncFunction9D822C24FunctionId": {
@@ -58,7 +64,13 @@
     "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoMutationupdateTodoinit0FunctionMutationupdateTodoinit0FunctionAppSyncFunctionDECD85CDFunctionId": {
       "Type": "String"
     },
+    "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoSubscriptiononCreateTodoauth0FunctionSubscriptiononCreateTodoauth0FunctionAppSyncFunctionB2AC4C77FunctionId": {
+      "Type": "String"
+    },
     "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoSubscriptionOnCreateTodoDataResolverFnSubscriptionOnCreateTodoDataResolverFnAppSyncFunctionCED2552FFunctionId": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoTodoCreatedByDataResolverFnTodoCreatedByDataResolverFnAppSyncFunctionFDE93A30FunctionId": {
       "Type": "String"
     }
   },
@@ -468,6 +480,9 @@
         "PipelineConfig": {
           "Functions": [
             {
+              "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodoauth0FunctionQuerygetTodoauth0FunctionAppSyncFunction9F8E8363FunctionId"
+            },
+            {
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId"
             },
             {
@@ -560,6 +575,9 @@
         "PipelineConfig": {
           "Functions": [
             {
+              "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodoauth0FunctionQuerygetTodoauth0FunctionAppSyncFunction9F8E8363FunctionId"
+            },
+            {
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId"
             },
             {
@@ -587,6 +605,36 @@
           ]
         },
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+      }
+    },
+    "MutationcreateCategoryauth0FunctionMutationcreateCategoryauth0FunctionAppSyncFunctionADBDFC31": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "DataSourceName": {
+          "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
+        },
+        "FunctionVersion": "2018-05-29",
+        "Name": "MutationcreateCategoryauth0Function",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/Mutation.createCategory.auth.1.req.vtl"
+            ]
+          ]
+        },
+        "ResponseMappingTemplate": "$util.toJson({})"
       }
     },
     "MutationCreateCategoryDataResolverFnMutationCreateCategoryDataResolverFnAppSyncFunction88A74168": {
@@ -655,6 +703,12 @@
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoMutationcreateTodoinit0FunctionMutationcreateTodoinit0FunctionAppSyncFunction9D822C24FunctionId"
             },
             {
+              "Fn::GetAtt": [
+                "MutationcreateCategoryauth0FunctionMutationcreateCategoryauth0FunctionAppSyncFunctionADBDFC31",
+                "FunctionId"
+              ]
+            },
+            {
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId"
             },
             {
@@ -683,6 +737,57 @@
         },
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
+    },
+    "MutationupdateCategoryauth0FunctionMutationupdateCategoryauth0FunctionAppSyncFunction89B37FA2": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "DataSourceName": {
+          "Fn::GetAtt": [
+            "CategoryDataSource",
+            "Name"
+          ]
+        },
+        "FunctionVersion": "2018-05-29",
+        "Name": "MutationupdateCategoryauth0Function",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/Mutation.updateCategory.auth.1.req.vtl"
+            ]
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/Mutation.updateCategory.auth.1.res.vtl"
+            ]
+          ]
+        }
+      },
+      "DependsOn": [
+        "CategoryDataSource"
+      ]
     },
     "MutationUpdateCategoryDataResolverFnMutationUpdateCategoryDataResolverFnAppSyncFunctionC24BA823": {
       "Type": "AWS::AppSync::FunctionConfiguration",
@@ -750,6 +855,12 @@
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoMutationupdateTodoinit0FunctionMutationupdateTodoinit0FunctionAppSyncFunctionDECD85CDFunctionId"
             },
             {
+              "Fn::GetAtt": [
+                "MutationupdateCategoryauth0FunctionMutationupdateCategoryauth0FunctionAppSyncFunction89B37FA2",
+                "FunctionId"
+              ]
+            },
+            {
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId"
             },
             {
@@ -778,6 +889,57 @@
         },
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
+    },
+    "MutationdeleteCategoryauth0FunctionMutationdeleteCategoryauth0FunctionAppSyncFunction8A0D27C9": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "DataSourceName": {
+          "Fn::GetAtt": [
+            "CategoryDataSource",
+            "Name"
+          ]
+        },
+        "FunctionVersion": "2018-05-29",
+        "Name": "MutationdeleteCategoryauth0Function",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/Mutation.deleteCategory.auth.1.req.vtl"
+            ]
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/Mutation.deleteCategory.auth.1.res.vtl"
+            ]
+          ]
+        }
+      },
+      "DependsOn": [
+        "CategoryDataSource"
+      ]
     },
     "MutationDeleteCategoryDataResolverFnMutationDeleteCategoryDataResolverFnAppSyncFunctionB44DFDF2": {
       "Type": "AWS::AppSync::FunctionConfiguration",
@@ -842,6 +1004,12 @@
         "PipelineConfig": {
           "Functions": [
             {
+              "Fn::GetAtt": [
+                "MutationdeleteCategoryauth0FunctionMutationdeleteCategoryauth0FunctionAppSyncFunction8A0D27C9",
+                "FunctionId"
+              ]
+            },
+            {
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId"
             },
             {
@@ -883,6 +1051,9 @@
         "PipelineConfig": {
           "Functions": [
             {
+              "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoSubscriptiononCreateTodoauth0FunctionSubscriptiononCreateTodoauth0FunctionAppSyncFunctionB2AC4C77FunctionId"
+            },
+            {
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId"
             },
             {
@@ -916,6 +1087,9 @@
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
+            {
+              "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoSubscriptiononCreateTodoauth0FunctionSubscriptiononCreateTodoauth0FunctionAppSyncFunctionB2AC4C77FunctionId"
+            },
             {
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId"
             },
@@ -951,6 +1125,9 @@
         "PipelineConfig": {
           "Functions": [
             {
+              "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoSubscriptiononCreateTodoauth0FunctionSubscriptiononCreateTodoauth0FunctionAppSyncFunctionB2AC4C77FunctionId"
+            },
+            {
               "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId"
             },
             {
@@ -963,6 +1140,37 @@
             "",
             [
               "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onDeleteCategory\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              {
+                "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+              },
+              "\"))\n\n$util.toJson({})"
+            ]
+          ]
+        },
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+      }
+    },
+    "CategorycreatedByResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "FieldName": "createdBy",
+        "TypeName": "Category",
+        "Kind": "PIPELINE",
+        "PipelineConfig": {
+          "Functions": [
+            {
+              "Ref": "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoTodoCreatedByDataResolverFnTodoCreatedByDataResolverFnAppSyncFunctionFDE93A30FunctionId"
+            }
+          ]
+        },
+        "RequestMappingTemplate": {
+          "Fn::Join": [
+            "",
+            [
+              "$util.qr($ctx.stash.put(\"typeName\", \"Category\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"createdBy\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },

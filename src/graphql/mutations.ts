@@ -16,6 +16,7 @@ export const createTodo = /* GraphQL */ `
           id
           name
           description
+          createdBy
           createdAt
           updatedAt
           todoCategoriesId
@@ -23,6 +24,7 @@ export const createTodo = /* GraphQL */ `
         nextToken
       }
       isComplete
+      createdBy
       createdAt
       updatedAt
     }
@@ -42,6 +44,7 @@ export const updateTodo = /* GraphQL */ `
           id
           name
           description
+          createdBy
           createdAt
           updatedAt
           todoCategoriesId
@@ -49,6 +52,7 @@ export const updateTodo = /* GraphQL */ `
         nextToken
       }
       isComplete
+      createdBy
       createdAt
       updatedAt
     }
@@ -68,6 +72,7 @@ export const deleteTodo = /* GraphQL */ `
           id
           name
           description
+          createdBy
           createdAt
           updatedAt
           todoCategoriesId
@@ -75,6 +80,7 @@ export const deleteTodo = /* GraphQL */ `
         nextToken
       }
       isComplete
+      createdBy
       createdAt
       updatedAt
     }
@@ -89,6 +95,7 @@ export const createCategory = /* GraphQL */ `
       id
       name
       description
+      createdBy
       createdAt
       updatedAt
       todoCategoriesId
@@ -104,6 +111,7 @@ export const updateCategory = /* GraphQL */ `
       id
       name
       description
+      createdBy
       createdAt
       updatedAt
       todoCategoriesId
@@ -119,6 +127,7 @@ export const deleteCategory = /* GraphQL */ `
       id
       name
       description
+      createdBy
       createdAt
       updatedAt
       todoCategoriesId

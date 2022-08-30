@@ -2,6 +2,13 @@
     "AppSyncApiName": "productively",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authproductivelye0fcc713",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "AuthModeLastUpdated": "2022-08-30T21:49:28.987Z",
     "S3DeploymentBucket": "amplify-productively-dev-115727-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/c9a02b724244118f74ce32eedc4be95d7a8f5b55"
+    "S3DeploymentRootKey": "amplify-appsync-files/95ce9bab6ecc4fae06469023fadc683e4279a6e1"
 }

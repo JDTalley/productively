@@ -41,6 +41,9 @@
       ],
       "Description": "Enable server side encryption powered by KMS."
     },
+    "AuthCognitoUserPoolId": {
+      "Type": "String"
+    },
     "AppSyncApiName": {
       "Type": "String",
       "Default": "AppSyncSimpleTransform"
@@ -58,7 +61,7 @@
     "GraphQLAPI": {
       "Type": "AWS::AppSync::GraphQLApi",
       "Properties": {
-        "AuthenticationType": "API_KEY",
+        "AuthenticationType": "AMAZON_COGNITO_USER_POOLS",
         "Name": {
           "Fn::Join": [
             "",
@@ -72,6 +75,20 @@
               }
             ]
           ]
+        },
+        "AdditionalAuthenticationProviders": [
+          {
+            "AuthenticationType": "API_KEY"
+          }
+        ],
+        "UserPoolConfig": {
+          "AwsRegion": {
+            "Ref": "AWS::Region"
+          },
+          "DefaultAction": "ALLOW",
+          "UserPoolId": {
+            "Ref": "AuthCognitoUserPoolId"
+          }
         }
       }
     },
@@ -111,7 +128,8 @@
             "ApiId"
           ]
         },
-        "Expires": 1662254468
+        "Description": "productively-api",
+        "Expires": 1662501362
       }
     },
     "GraphQLAPINONEDS95A13CF0": {
@@ -256,10 +274,22 @@
           "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
             "Ref": "S3DeploymentRootKey"
           },
+          "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodoauth0FunctionQuerygetTodoauth0FunctionAppSyncFunction9F8E8363FunctionId": {
+            "Fn::GetAtt": [
+              "Todo",
+              "Outputs.transformerrootstackTodoQuerygetTodoauth0FunctionQuerygetTodoauth0FunctionAppSyncFunction9F8E8363FunctionId"
+            ]
+          },
           "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId": {
             "Fn::GetAtt": [
               "Todo",
               "Outputs.transformerrootstackTodoQuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction083ADD8DFunctionId"
+            ]
+          },
+          "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
+            "Fn::GetAtt": [
+              "GraphQLAPINONEDS95A13CF0",
+              "Name"
             ]
           },
           "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoMutationcreateTodoinit0FunctionMutationcreateTodoinit0FunctionAppSyncFunction9D822C24FunctionId": {
@@ -274,10 +304,22 @@
               "Outputs.transformerrootstackTodoMutationupdateTodoinit0FunctionMutationupdateTodoinit0FunctionAppSyncFunctionDECD85CDFunctionId"
             ]
           },
+          "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoSubscriptiononCreateTodoauth0FunctionSubscriptiononCreateTodoauth0FunctionAppSyncFunctionB2AC4C77FunctionId": {
+            "Fn::GetAtt": [
+              "Todo",
+              "Outputs.transformerrootstackTodoSubscriptiononCreateTodoauth0FunctionSubscriptiononCreateTodoauth0FunctionAppSyncFunctionB2AC4C77FunctionId"
+            ]
+          },
           "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoSubscriptionOnCreateTodoDataResolverFnSubscriptionOnCreateTodoDataResolverFnAppSyncFunctionCED2552FFunctionId": {
             "Fn::GetAtt": [
               "Todo",
               "Outputs.transformerrootstackTodoSubscriptionOnCreateTodoDataResolverFnSubscriptionOnCreateTodoDataResolverFnAppSyncFunctionCED2552FFunctionId"
+            ]
+          },
+          "referencetotransformerrootstackTodoNestedStackTodoNestedStackResource9AC126A3OutputstransformerrootstackTodoTodoCreatedByDataResolverFnTodoCreatedByDataResolverFnAppSyncFunctionFDE93A30FunctionId": {
+            "Fn::GetAtt": [
+              "Todo",
+              "Outputs.transformerrootstackTodoTodoCreatedByDataResolverFnTodoCreatedByDataResolverFnAppSyncFunctionFDE93A30FunctionId"
             ]
           }
         }
@@ -320,10 +362,10 @@
               "ApiId"
             ]
           },
-          "referencetotransformerrootstackCategoryNestedStackCategoryNestedStackResourceD9545530OutputstransformerrootstackCategoryCategoryDataSource9AF16D52Name": {
+          "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
             "Fn::GetAtt": [
-              "Category",
-              "Outputs.transformerrootstackCategoryCategoryDataSource9AF16D52Name"
+              "GraphQLAPINONEDS95A13CF0",
+              "Name"
             ]
           },
           "referencetotransformerrootstackS3DeploymentBucket7592718ARef": {
@@ -331,6 +373,12 @@
           },
           "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
             "Ref": "S3DeploymentRootKey"
+          },
+          "referencetotransformerrootstackCategoryNestedStackCategoryNestedStackResourceD9545530OutputstransformerrootstackCategoryCategoryDataSource9AF16D52Name": {
+            "Fn::GetAtt": [
+              "Category",
+              "Outputs.transformerrootstackCategoryCategoryDataSource9AF16D52Name"
+            ]
           },
           "referencetotransformerrootstackCategoryNestedStackCategoryNestedStackResourceD9545530OutputstransformerrootstackCategoryCategoryTable44E1EFF7Ref": {
             "Fn::GetAtt": [
@@ -461,6 +509,5 @@
         }
       }
     }
-  },
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"9.2.1\",\"stackType\":\"api-AppSync\",\"metadata\":{}}"
+  }
 }
