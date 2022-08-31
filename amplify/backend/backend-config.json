@@ -25,7 +25,7 @@
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
                 "apiKeyExpirationDays": 7,
-                "apiKeyExpirationDate": "2022-09-06T21:56:00.517Z",
+                "apiKeyExpirationDate": "2022-09-07T00:07:18.604Z",
                 "description": "productively-api"
               }
             }
