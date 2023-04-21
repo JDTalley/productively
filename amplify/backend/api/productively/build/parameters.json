@@ -8,6 +8,7 @@
             "Outputs.UserPoolId"
         ]
     },
+    "AuthModeLastUpdated": "2022-08-30T21:49:28.987Z",
     "S3DeploymentBucket": "amplify-productively-dev-115727-deployment",
     "S3DeploymentRootKey": "amplify-appsync-files/2d2ad08e9bad468f8c36e2a531a8c48b45363eca"
 }

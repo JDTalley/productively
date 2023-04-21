@@ -52,7 +52,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-productively-dev-115727-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiproductively"
       },
-      "lastPushTimeStamp": "2022-08-31T00:16:52.824Z",
+      "lastPushTimeStamp": "2022-08-31T01:53:47.592Z",
       "lastPushDirHash": "BzkafBCSCJRfzwS+34GKEJAajIk="
     }
   },
@@ -86,7 +86,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-productively-dev-115727-deployment/amplify-cfn-templates/auth/productivelye0fcc713-cloudformation-template.json",
         "logicalId": "authproductivelye0fcc713"
       },
-      "lastPushTimeStamp": "2022-08-31T00:16:50.612Z",
+      "lastPushTimeStamp": "2022-08-31T01:53:47.592Z",
       "output": {
         "UserPoolId": "us-east-1_jW4VZ7Al0",
         "AppClientIDWeb": "1btsq6dpvno65jnppu13ffrd9d",
@@ -95,10 +95,10 @@
         "IdentityPoolId": "us-east-1:4afbabad-9a69-4353-9689-dd09e7efd944",
         "UserPoolArn": "arn:aws:cognito-idp:us-east-1:714341196257:userpool/us-east-1_jW4VZ7Al0",
         "IdentityPoolName": "productivelye0fcc713_identitypool_e0fcc713__dev",
-        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://productively-dev.jdtalley.com/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://productively-dev.jdtalley.com/\"]}",
         "UserPoolName": "productivelye0fcc713_userpool_e0fcc713"
       },
-      "lastPushDirHash": "IMS18U6fK15Sim29RrqVqHW4gFc="
+      "lastPushDirHash": "9a8XaZJs657OYubvzIGC1gFVpBQ="
     }
   }
 }

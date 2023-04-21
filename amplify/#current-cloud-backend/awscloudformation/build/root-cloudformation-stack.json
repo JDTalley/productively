@@ -207,7 +207,6 @@
           "hostedUIDomainName": "productivelye0fcc713-e0fcc713",
           "authProvidersUserPool": "Google",
           "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-          "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
           "userPoolGroupList": "",
           "serviceName": "Cognito",
           "usernameCaseSensitive": false,
@@ -226,7 +225,8 @@
           },
           "breakCircularDependency": true,
           "dependsOn": "",
-          "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\"}]",
+          "hostedUIProviderCreds": "[]",
+          "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://productively-dev.jdtalley.com/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://productively-dev.jdtalley.com/\"]}",
           "env": "dev"
         }
       }

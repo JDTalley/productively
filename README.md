@@ -1,2 +1,2 @@
-# productivity
-Productivity App
+# Productively
+A Productivity App

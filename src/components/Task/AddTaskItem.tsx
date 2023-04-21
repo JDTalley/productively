@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import TextInput from '../ui/TextInput';
 
 export interface Props {
     addTaskItem: Function
@@ -47,6 +48,10 @@ const AddTaskItem: React.FC<Props> = (props) => {
             //padding: '0 .5em',
             width: '100%',
         }}>
+            <TextInput 
+                value={itemTemp.name}
+                onChange={handleNameChange}
+                onKeyPress={handleAddTask} />
             <Box sx={{display: 'flex', width: '100%', justifyContent: 'center', padding: '.5em 0'}}>
                 <TextField 
                 label="Enter Task" 
