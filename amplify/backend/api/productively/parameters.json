@@ -1,5 +1,0 @@
-{
-  "AppSyncApiName": "productively",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
-}
