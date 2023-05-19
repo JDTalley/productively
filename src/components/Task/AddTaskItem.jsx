@@ -56,10 +56,7 @@ const AddTaskItem = (props) => {
         <input
           label="Enter Task"
           variant="standard"
-          fullWidth={true}
           margin="none"
-          InputLabelProps={{ sx: { padding: "0 .5em" } }}
-          InputProps={{ sx: { padding: "0 .5em" } }}
           value={itemTemp.name}
           onChange={handleNameChange}
           onKeyPress={handleAddTask}

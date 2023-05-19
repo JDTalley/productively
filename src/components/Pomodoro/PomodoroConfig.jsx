@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+import Button from "../ui/Button";
 //import Button from '@mui/material/Button';
 //import Dialog from '@mui/material/Dialog';
 //import DialogTitle from '@mui/material/DialogTitle';
@@ -127,20 +130,20 @@ const PomodoroConfig = (props) => {
           />
         </div>
         <div>
-          <button variant="contained" onClick={handleConfigDefault}>
+          <Button name="Default configuration" onClick={handleConfigDefault}>
             Default Settings
-          </button>
-          <button variant="contained" onClick={handleConfigSave}>
+          </Button>
+          <Button name="Save configuration" onClick={handleConfigSave}>
             Save Settings
-          </button>
-          <button variant="contained" onClick={handleClickClose}>
+          </Button>
+          <Button name="Cancel configuration" onClick={handleClickClose}>
             Cancel
-          </button>
+          </Button>
         </div>
       </div>
-      <button variant="contained" onClick={handleClickOpen}>
+      <Button name="Configure timer" onClick={handleClickOpen}>
         Config
-      </button>
+      </Button>
     </div>
   );
 };

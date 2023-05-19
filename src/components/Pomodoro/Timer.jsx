@@ -1,5 +1,11 @@
 import { useEffect } from "react";
-//import Typography from '@mui/material/Typography';
+
+import styled from "styled-components";
+
+const StyledDiv = styled.div`
+  padding: 10px;
+  text-align: center;
+`;
 
 const Timer = (props) => {
   useEffect(() => {
@@ -31,7 +37,7 @@ const Timer = (props) => {
   // Convert mins and secs to friendly format
   const timerText = `${padNumber(minutes)}:${padNumber(seconds)}`;
 
-  return <div sx={{ textAlign: "center", fontSize: "2rem" }}>{timerText}</div>;
+  return <StyledDiv>{timerText}</StyledDiv>;
 };
 
 export default Timer;

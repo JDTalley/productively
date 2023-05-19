@@ -1,33 +1,37 @@
 import Pomodoro from "./components/Pomodoro/Pomodoro";
 import TaskList from "./components/Task/TaskList";
+
+import { ThemeProvider } from "styled-components";
 //import Container from "@mui/material/Container";
 //import { createTheme } from "@mui/material/styles";
 //import ThemeProvider from "@mui/private-theming/ThemeProvider";
 import "./App.css";
 
 function App() {
-  /* const darkTheme = createTheme({
-    palette: {
-      primary: {
-        light: "#585858",
-        main: "#2f2f2f",
-        dark: "#050505",
-        contrastText: "#e6e6e6",
+  const theme = {
+    colors: {
+      grayscale: {
+        light: "hsl(0, 0%, 35%)",
+        main: "hsl(0, 0%, 18%)",
+        dark: "hsl(0, 0%, 2%)",
+        contrast: "hsl(0, 0%, 90%)",
       },
-      secondary: {
-        light: "#6cb9fc",
-        main: "#2f89c9",
-        dark: "#005c98",
-        contrastText: "#2f2f2f",
+      primary: {
+        light: "hsl(205, 62%, 70%)",
+        main: "hsl(205, 62%, 49%)",
+        dark: "hsl(205, 62%, 29%)",
+        contrast: "hsl(0, 0%, 18%)",
       },
     },
-  }); */
+  };
 
   return (
-    <div>
-      <TaskList />
-      <Pomodoro />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        {/* <TaskList /> */}
+        <Pomodoro />
+      </div>
+    </ThemeProvider>
   );
 }
 

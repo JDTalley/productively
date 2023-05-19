@@ -95,7 +95,6 @@ const TaskList = () => {
           maxHeight: "300px",
           overflow: "auto",
         }}
-        dense={true}
       >
         {tasks.map((task, i) => {
           return (

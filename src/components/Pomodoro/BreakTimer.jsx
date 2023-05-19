@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Timer from "./Timer";
 
+import Button from "../ui/Button";
+
 const BreakTimer = (props) => {
   const onTick = () => {
     if (props.pomodoroTimer.remaining > 0) {
@@ -78,8 +80,16 @@ const BreakTimer = (props) => {
         isActive={props.pomodoroTimer.isActive}
         onTick={onTick}
       />
-      <button onClick={handleTimerPause}>Start/Stop</button>
-      <button onClick={handleTimerReset}>Reset</button>
+      <Button
+        name="Start/Stop timer"
+        text="Start/Stop"
+        onClick={handleTimerPause}
+      ></Button>
+      <Button
+        name="Reset timer"
+        text="Reset"
+        onClick={handleTimerReset}
+      ></Button>
     </div>
   );
 };

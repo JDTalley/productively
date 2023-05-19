@@ -75,7 +75,7 @@ const PomodoroTimer = (props) => {
   }
 
   return (
-    <div sx={{ margin: "1rem 0" }}>
+    <div>
       <TimerCircleGraphic
         startTime={startTime}
         timeRemaining={props.pomodoroTimer.remaining}
