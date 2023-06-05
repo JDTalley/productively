@@ -1,10 +1,7 @@
-import Pomodoro from "./components/Pomodoro/Pomodoro";
+import Pomodoro from "./components/Pomodoro";
 import TaskList from "./components/Task/TaskList";
 
 import { ThemeProvider } from "styled-components";
-//import Container from "@mui/material/Container";
-//import { createTheme } from "@mui/material/styles";
-//import ThemeProvider from "@mui/private-theming/ThemeProvider";
 import "./App.css";
 
 function App() {
@@ -22,6 +19,9 @@ function App() {
         dark: "hsl(205, 62%, 29%)",
         contrast: "hsl(0, 0%, 18%)",
       },
+    },
+    fonts: {
+      sans: '"Montserrat", sans-serif',
     },
   };
 

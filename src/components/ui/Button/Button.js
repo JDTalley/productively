@@ -18,8 +18,12 @@ const StyledButton = styled.button`
   }
 `;
 
-function Button({ name, children }) {
-  return <StyledButton name={name}>{children}</StyledButton>;
+function Button({ name, children, onClick }) {
+  return (
+    <StyledButton name={name} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
 }
 
 export default Button;

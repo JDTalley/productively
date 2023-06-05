@@ -1,8 +1,4 @@
-import React from "react";
-
 import styled from "styled-components";
-//import Box from "@mui/material/Box";
-//import CircularProgress from '@mui/material/CircularProgress';
 
 const CircleProgress = styled.div`
   padding: 25px;
@@ -17,12 +13,8 @@ const CircleProgress = styled.div`
     );
 `;
 
-const TimerCircleGraphic = (props) => {
-  const progress =
-    ((props.startTime * 60 - props.timeRemaining) / (props.startTime * 60)) *
-    100;
+function CircleProgressBar({ percentComplete }) {
+  return <CircleProgress progress={percentComplete} />;
+}
 
-  return <CircleProgress progress={progress} />;
-};
-
-export default TimerCircleGraphic;
+export default CircleProgressBar;
