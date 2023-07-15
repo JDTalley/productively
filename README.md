@@ -1,3 +1,3 @@
-# productivity
+# Productively
 
-Productivity App
+Productivity App.
