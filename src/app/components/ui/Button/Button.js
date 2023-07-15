@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const PrimaryButton = styled.button`
   color: white;
   background-color: hsl(205, 62%, 49%);
-  padding: 10px 10px;
+  padding: 10px 15px;
   border: none;
   border-radius: 5px;
   margin: 2px;
