@@ -62,6 +62,7 @@ const TimerText = styled.p`
   font-size: 40px;
   //letter-spacing: 0.1rem;
 `;
+
 /**
  * Enum for timer modes
  * @readonly
@@ -180,7 +181,6 @@ function PomodoroTimer({ config }) {
           </TimerText>
         </CircleProgressBar>
       </CircleContainer>
-
       <Button
         name='Toggle Timer'
         onClick={() => setTimerRunning(!timerRunning)}
