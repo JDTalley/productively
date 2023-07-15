@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import useCountdownTime from '../../hooks/useCountdownTime';
 import styled from 'styled-components';
 import Button from '../ui/Button';
 import ProgressBar from '../ui/ProgressBar';
@@ -201,5 +200,35 @@ const padNumber = (number) => {
     return number;
   }
 };
+
+/**
+ *
+ * @param {seconds} initialTime Optional time in seconds to set the initial timer to
+ * @returns time, setTime, timerRunning, setTimerRunning
+ */
+function useCountdownTime(initialTime) {
+  const [time, setTime] = React.useState(initialTime || 60);
+  const [timerRunning, setTimerRunning] = React.useState(false);
+
+  React.useEffect(() => {
+    if (timerRunning) {
+      const intervalId = window.setInterval(() => {
+        setTime((oldTime) => {
+          const newTime = oldTime - 1;
+          if (newTime === 0) {
+            setTimerRunning(false);
+          }
+          return newTime;
+        });
+      }, 1000);
+
+      return () => {
+        window.clearInterval(intervalId);
+      };
+    }
+  }, [timerRunning]);
+
+  return [time, setTime, timerRunning, setTimerRunning];
+}
 
 export default PomodoroTimer;
