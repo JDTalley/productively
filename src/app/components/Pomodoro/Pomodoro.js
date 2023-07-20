@@ -6,8 +6,13 @@ import Button from '../ui/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 
-// Wrapper for component
 const Container = styled.div`
+  position: relative;
+  max-width: 400px;
+`;
+
+// Container for component
+const PomodoroContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,7 +22,7 @@ const Container = styled.div`
     hsl(0 0% 5% / 0.2) 0px 5px 15px,
     hsl(0 0% 5% / 0.1) 0px 1px 2px;
   overflow: hidden;
-  max-width: 400px;
+
   min-height: 400px;
 `;
 
@@ -86,10 +91,11 @@ const ButtonContainer = styled.div`
 `;
 
 const ConfigButton = styled.button`
-  //padding: 2px;
+  padding: 0;
+  font-size: 18px;
   position: absolute;
-  top: 120px;
-  left: 388px;
+  top: 60px;
+  right: 28px;
   border: none;
   background-color: inherit;
   color: hsl(205, 0%, 55%);
@@ -112,7 +118,7 @@ function Pomodoro() {
   const [isConfigActive, setIsConfigActive] = React.useState(false);
 
   return (
-    <div>
+    <Container>
       {!isConfigActive && (
         <ConfigButton
           name='Configure Pomodoro'
@@ -122,7 +128,7 @@ function Pomodoro() {
         </ConfigButton>
       )}
       {isConfigActive ? (
-        <Container>
+        <PomodoroContainer>
           <ConfigWrapper>
             <SubHeading>
               <h3>Settings</h3>
@@ -230,13 +236,13 @@ function Pomodoro() {
               </Button>
             </ButtonContainer>
           </ButtonGroup>
-        </Container>
+        </PomodoroContainer>
       ) : (
-        <Container>
+        <PomodoroContainer>
           <PomodoroTimer config={config}></PomodoroTimer>
-        </Container>
+        </PomodoroContainer>
       )}
-    </div>
+    </Container>
   );
 }
 
